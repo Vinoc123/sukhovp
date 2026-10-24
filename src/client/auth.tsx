@@ -68,6 +68,7 @@ export function Layout() {
         )}
       </header>
       <Outlet />
+      <footer className="site-note">Это не коммерческий проект, а школьная работа. Сайт не предназначен для продажи товаров или оказания услуг.</footer>
     </div>
   )
 }
