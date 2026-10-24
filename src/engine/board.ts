@@ -204,7 +204,9 @@ export function applyMove(state: GameState, action: Action): GameState {
 }
 
 export function pieceCount(state: GameState): number {
-  return state.cells.reduce((sum, cell) => sum + (cell ? 1 : 0), 0)
+  let count = 0
+  for (const cell of state.cells) if (cell) count += 1
+  return count
 }
 
 export function cellsFromRows(rows: string[]): { cells: Cell[]; cols: number; rows: number } {
