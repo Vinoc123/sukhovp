@@ -45,44 +45,31 @@ export function ProfilePage() {
           <p className="eyebrow">{profile.rank} · {profile.place} место</p>
           <h1>{profile.username}</h1>
           <p className="rating-big">{profile.rating}<small>Эло</small></p>
-          <p className="muted">На сайте с {new Date(profile.createdAt).toLocaleDateString('ru-RU')} · задачи {profile.puzzleRating}</p>
+          <p className="muted">На сайте с {new Date(profile.createdAt).toLocaleDateString('ru-RU')}</p>
         </div>
       </div>
       <div className="stats">
         <article className="stat"><b>{profile.gamesPlayed}</b><span className="muted">{ruWord(profile.gamesPlayed, 'партия', 'партии', 'партий')}</span></article>
         <article className="stat"><b>{profile.wins}</b><span className="muted">{ruWord(profile.wins, 'победа', 'победы', 'побед')}</span></article>
         <article className="stat"><b>{winRate}%</b><span className="muted">процент побед</span></article>
-        <article className="stat"><b>{profile.puzzleSolved}</b><span className="muted">{ruWord(profile.puzzleSolved, 'задача', 'задачи', 'задач')}</span></article>
       </div>
       <article className="panel">
         <h2>Рейтинг</h2>
         <Spark points={profile.history.map((point) => point.rating)} />
       </article>
-      <div className="split">
-        <article className="panel recent">
-          <h2>Последние партии</h2>
-          {profile.recent.length === 0 && <p className="muted">Пока тихо.</p>}
-          {profile.recent.map((game) => (
-            <Link key={game.id} to={`/play/${game.id}`}>
-              <span>
-                <b>{RESULT[game.result]}</b> против {game.opponent}
-                <div className="muted">{MODIFIERS.find((item) => item.id === game.modifier)?.label}</div>
-              </span>
-              <b>{game.delta === null || game.delta === undefined ? '' : game.delta > 0 ? `+${game.delta}` : game.delta}</b>
-            </Link>
-          ))}
-        </article>
-        <article className="panel">
-          <h2>Задачи</h2>
-          <div className="dots">
-            {profile.puzzles.map((puzzle, index) => (
-              <Link key={puzzle.id} className={`dot ${puzzle.solved ? 'on' : ''}`} to={`/puzzles/${puzzle.id}`} title={puzzle.title}>
-                {index + 1}
-              </Link>
-            ))}
-          </div>
-        </article>
-      </div>
+      <article className="panel recent">
+        <h2>Последние партии</h2>
+        {profile.recent.length === 0 && <p className="muted">Пока тихо.</p>}
+        {profile.recent.map((game) => (
+          <Link key={game.id} to={`/play/${game.id}`}>
+            <span>
+              <b>{RESULT[game.result]}</b> против {game.opponent}
+              <div className="muted">{MODIFIERS.find((item) => item.id === game.modifier)?.label}</div>
+            </span>
+            <b>{game.delta === null || game.delta === undefined ? '' : game.delta > 0 ? `+${game.delta}` : game.delta}</b>
+          </Link>
+        ))}
+      </article>
     </section>
   )
 }

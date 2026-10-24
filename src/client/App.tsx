@@ -6,8 +6,6 @@ import { HomePage } from './pages/Home.tsx'
 import { LeaderboardPage } from './pages/Leaderboard.tsx'
 import { PlayPage } from './pages/Play.tsx'
 import { ProfilePage } from './pages/Profile.tsx'
-import { PuzzlePage } from './pages/Puzzle.tsx'
-import { PuzzlesPage } from './pages/Puzzles.tsx'
 import './styles.css'
 
 export function App() {
@@ -23,8 +21,6 @@ export function App() {
             <Route path="/u/:username" element={<ProfilePage />} />
             <Route path="/play" element={<Guard><PlayPage /></Guard>} />
             <Route path="/play/:id" element={<GamePage />} />
-            <Route path="/puzzles" element={<PuzzlesPage />} />
-            <Route path="/puzzles/:id" element={<Guard><PuzzlePage /></Guard>} />
             <Route path="*" element={<p className="center">Такой страницы нет.</p>} />
           </Route>
         </Routes>

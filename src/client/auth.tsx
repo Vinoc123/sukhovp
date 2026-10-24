@@ -44,7 +44,6 @@ export function Layout() {
         <Link className="brand" to="/">Квартет</Link>
         <nav className="nav">
           <NavLink to="/play">Играть</NavLink>
-          <NavLink to="/puzzles">Задачи</NavLink>
           <NavLink to="/leaderboard">Рейтинг</NavLink>
         </nav>
         {loading ? null : user ? (

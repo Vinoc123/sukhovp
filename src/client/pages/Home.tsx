@@ -28,11 +28,10 @@ export function HomePage() {
           <p className="eyebrow">Онлайн-зал</p>
           <h1>Квартет</h1>
           <p className="lede">
-            Четыре в ряд с рейтингом, часами и задачами. Доска может перевернуться, повернуться или отдать вам сразу две фишки.
+            Четыре в ряд с рейтингом и часами. Доска может перевернуться, повернуться или отдать вам сразу две фишки.
           </p>
           <div className="cta">
             <Link className="btn gold" to="/play">Играть</Link>
-            <Link className="btn ghost" to="/puzzles">Задачи</Link>
             <Link className="btn ghost" to="/leaderboard">Рейтинг</Link>
           </div>
         </div>
@@ -49,10 +48,6 @@ export function HomePage() {
           <article className="feature">
             <h3>Свои часы</h3>
             <p>Без лимита, 10+5, 5+3, 3+2, минута или 30 секунд на ход. Время считает сервер.</p>
-          </article>
-          <article className="feature">
-            <h3>Задачи</h3>
-            <p>Иногда хватает одного хода, иногда лучших ходов три. Ошибка возвращает позицию назад.</p>
           </article>
         </div>
       </section>

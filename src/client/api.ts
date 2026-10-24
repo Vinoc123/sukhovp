@@ -48,36 +48,6 @@ export interface Game {
   players: GamePlayer[]
 }
 
-export interface PuzzleCard {
-  id: string
-  title: string
-  difficulty: 1 | 2 | 3
-  modifier: Modifier
-  rows: number
-  cols: number
-  connect: number
-  cells: number[]
-  gravity: 1 | -1
-  plies: number
-  you: 1 | 2
-  steps: number
-  solved: boolean
-}
-
-export interface PuzzleState {
-  rows: number
-  cols: number
-  connect: number
-  modifier: Modifier
-  cells: number[]
-  gravity: 1 | -1
-  turn: 1 | 2
-  winner: number
-  winLine: number[] | null
-  rushLeft: number
-  plies: number
-}
-
 async function request<T>(path: string, body?: unknown, method = body ? 'POST' : 'GET'): Promise<T> {
   const response = await fetch(path, {
     method,
@@ -147,11 +117,4 @@ export const api = {
         puzzles: Array<{ id: string; title: string; difficulty: number; solved: boolean }>
       }
     }>(`/api/users/${encodeURIComponent(username)}`).then((data) => data.profile),
-  puzzles: () => request<{ puzzles: PuzzleCard[] }>('/api/puzzles').then((data) => data.puzzles),
-  puzzle: (id: string) => request<{ puzzle: PuzzleCard }>(`/api/puzzles/${id}`).then((data) => data.puzzle),
-  attempt: (id: string, moves: Action[]) =>
-    request<{ status: 'wrong' | 'continue' | 'solved'; message: string | null; puzzleRating: number; state: PuzzleState }>(
-      `/api/puzzles/${id}/attempt`,
-      { moves },
-    ),
 }

@@ -30,7 +30,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
       <h1>{mode === 'login' ? 'С возвращением' : 'Новый игрок'}</h1>
       <label>
         Ник
-        <input value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" />
+        <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" />
       </label>
       <label>
         Пароль
