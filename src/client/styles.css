@@ -286,9 +286,12 @@ input[type="text"], input[type="password"] {
 .error { color: #ffb1a8; }
 .center { text-align: center; padding: 48px; }
 
+.topbar .userchip, .topbar > .btn { margin-left: auto; }
+
 @media (max-width: 900px) {
   .hero, .stage, .split, .features, .choices, .cards, .stats { grid-template-columns: 1fr; }
-  .topbar { flex-wrap: wrap; gap: 10px; }
+  .topbar { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+  .nav { order: 3; flex-basis: 100%; }
   .demo { justify-self: start; transform: none; }
   .felt { --cell: min(48px, calc((100vw - 72px) / var(--cols))); }
   .hero h1 { font-size: 64px; }

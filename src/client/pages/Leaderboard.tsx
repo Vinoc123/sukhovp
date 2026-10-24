@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api.ts'
 import { Avatar } from '../components/Avatar.tsx'
+import { ruWord } from '../words.ts'
 
 interface Row {
   place: number
@@ -32,7 +33,7 @@ export function LeaderboardPage() {
             <Avatar name={player.username} size={42} />
             <span>
               <b>{player.username}</b>
-              <div className="muted">{player.games} партий · {player.games ? Math.round((player.wins / player.games) * 100) : 0}% побед</div>
+              <div className="muted">{player.games} {ruWord(player.games, 'партия', 'партии', 'партий')} · {player.games ? Math.round((player.wins / player.games) * 100) : 0}% побед</div>
             </span>
             <b>{player.rating}</b>
           </Link>

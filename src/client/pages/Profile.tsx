@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { MODIFIERS } from '../../engine/presets.ts'
 import { api } from '../api.ts'
 import { Avatar } from '../components/Avatar.tsx'
+import { ruWord } from '../words.ts'
 
 type Profile = Awaited<ReturnType<typeof api.profile>>
 
@@ -48,10 +49,10 @@ export function ProfilePage() {
         </div>
       </div>
       <div className="stats">
-        <article className="stat"><b>{profile.gamesPlayed}</b><span className="muted">партий</span></article>
-        <article className="stat"><b>{profile.wins}</b><span className="muted">побед</span></article>
+        <article className="stat"><b>{profile.gamesPlayed}</b><span className="muted">{ruWord(profile.gamesPlayed, 'партия', 'партии', 'партий')}</span></article>
+        <article className="stat"><b>{profile.wins}</b><span className="muted">{ruWord(profile.wins, 'победа', 'победы', 'побед')}</span></article>
         <article className="stat"><b>{winRate}%</b><span className="muted">процент побед</span></article>
-        <article className="stat"><b>{profile.puzzleSolved}</b><span className="muted">задач</span></article>
+        <article className="stat"><b>{profile.puzzleSolved}</b><span className="muted">{ruWord(profile.puzzleSolved, 'задача', 'задачи', 'задач')}</span></article>
       </div>
       <article className="panel">
         <h2>Рейтинг</h2>

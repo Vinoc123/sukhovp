@@ -182,14 +182,19 @@ function finish(game: GameRow, winner: number, reason: string, now: number) {
   return game
 }
 
+function flagClock(game: GameRow, side: 1 | 2) {
+  if (side === 1) game.clock1_ms = 0
+  else game.clock2_ms = 0
+}
+
 function expireClock(game: GameRow, now: number): GameRow {
   if (game.status !== 'active') return game
   const state = replay(game)
   const clock = readClock(game, state)
   if (!clock.running || unlimitedClock(clock)) return game
   if (remaining(clock, now, state.turn) > 0) return game
-  const winner = state.turn === 1 ? 2 : 1
-  return finish(game, winner, 'timeout', now)
+  flagClock(game, state.turn)
+  return finish(game, state.turn === 1 ? 2 : 1, 'timeout', now)
 }
 
 function seatOf(game: GameRow, userId: number | null): 1 | 2 | null {
@@ -375,6 +380,7 @@ function playBot(game: GameRow, state: GameState, clock: Clock, moves: Action[])
     const move = chooseMove(state, game.bot_level as BotLevel)
     const charged = charge(clock, Date.now(), 2)
     if (charged.flagged) {
+      flagClock(game, 2)
       finish(game, 1, 'timeout', Date.now())
       return { state, clock, moves, done: true }
     }
@@ -400,6 +406,7 @@ export function playMove(user: UserRow, id: string, action: Action) {
     let clock = readClock(game, state)
     const charged = charge(clock, now, state.turn)
     if (charged.flagged) {
+      flagClock(game, state.turn)
       game = finish(game, state.turn === 1 ? 2 : 1, 'timeout', now)
       return present(game, user.id)
     }
